@@ -4,7 +4,6 @@ import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const pathName = usePathname()
-  console.log(pathName, pathName.includes('dashboard'))
 
   if(!pathName.includes('dashboard')){
 

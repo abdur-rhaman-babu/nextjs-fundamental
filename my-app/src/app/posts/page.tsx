@@ -1,4 +1,5 @@
 import { getPost, Post } from "@/data";
+import Link from "next/link";
 
 const Posts = async () => {
   const posts: Post[] = await getPost();
@@ -11,6 +12,7 @@ const Posts = async () => {
             <div key={post.id} className="border-2 shadow-lg p-2 rounded-lg">
               <h1>{post.title}</h1>
               <p>{post.body}</p>
+              <Link href={`/posts/${post.id.toString()}`}><button>Details</button></Link>
             </div>
           );
         })}
