@@ -1,5 +1,11 @@
 import { getPost, Post } from "@/data";
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "All Post",
+  description: "Fetch JSON data using server side",
+};
 
 const Posts = async () => {
   const posts: Post[] = await getPost();

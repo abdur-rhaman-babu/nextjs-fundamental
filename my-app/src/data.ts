@@ -18,6 +18,7 @@ export const getSinglePost = async (postId: string)=>{
 }
 
 
+// fetching mealdb data
 export const getMealsData = async (search: string) => {
     try {
       const res = await fetch(
@@ -29,3 +30,10 @@ export const getMealsData = async (search: string) => {
       console.log(error);
     }
   };
+
+
+  export const getSingleMeal = async (mealId: string)=>{
+    const res = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`)
+    const data = await res.json()
+    return data.meals[0];
+}

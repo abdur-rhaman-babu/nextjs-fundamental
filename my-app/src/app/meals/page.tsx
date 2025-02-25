@@ -1,5 +1,8 @@
 import { getMealsData } from "@/data";
 import MealSearchInput from "./components/MealSearchInput";
+import Link from "next/link";
+import { Metadata } from "next";
+
 interface Meal {
   idMeal: string;
   strMeal: string;
@@ -7,6 +10,11 @@ interface Meal {
   strCategory: string;
   strInstructions: string;
 }
+
+export const metadata: Metadata = {
+  title: "All Meals",
+  description: "Fetch JSON data using server side",
+};
 
 interface MealsPageProps {
   searchParams: { search?: string };
@@ -29,6 +37,7 @@ const MealsPage = async ({ searchParams }: MealsPageProps) => {
           validMeals.map((meal) => (
             <div key={meal.idMeal} className="border-2 shadow-lg p-5">
               <h1 className="font-bold text-3xl">{meal.strMeal}</h1>
+              <Link href={`/meals/${meal.idMeal}`}><button>Details</button></Link>
               <p>{meal.strInstructions}</p>
             </div>
           ))
