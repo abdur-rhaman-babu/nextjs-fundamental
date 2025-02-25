@@ -2,6 +2,7 @@ import { getMealsData } from "@/data";
 import MealSearchInput from "./components/MealSearchInput";
 import Link from "next/link";
 import { Metadata } from "next";
+import Image from "next/image";
 
 interface Meal {
   idMeal: string;
@@ -17,13 +18,13 @@ export const metadata: Metadata = {
 };
 
 interface MealsPageProps {
-  searchParams: { search?: string };
+  searchParams: { search: string };
 }
 const MealsPage = async ({ searchParams }: MealsPageProps) => {
-  const search = (await searchParams?.search) || "";
+  const { search } = searchParams || "";
 
   const meals: Meal[] = await getMealsData(search);
-  const validMeals = Array.isArray(meals) ? meals : []; 
+  const validMeals = Array.isArray(meals) ? meals : [];
 
   return (
     <div>
@@ -36,9 +37,16 @@ const MealsPage = async ({ searchParams }: MealsPageProps) => {
         ) : (
           validMeals.map((meal) => (
             <div key={meal.idMeal} className="border-2 shadow-lg p-5">
+              <Image
+                src={meal.strMealThumb}
+                width={641}
+                height={641}
+                alt={meal.strMeal}
+              />
               <h1 className="font-bold text-3xl">{meal.strMeal}</h1>
-              <Link href={`/meals/${meal.idMeal}`}><button>Details</button></Link>
-              <p>{meal.strInstructions}</p>
+              <Link href={`/meals/${meal.idMeal}`}>
+                <button>Details</button>
+              </Link>
             </div>
           ))
         )}
